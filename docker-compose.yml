@@ -2,6 +2,7 @@ services:
   caddy:
     image: caddy:latest
     restart: unless-stopped
+    networks: ["n8n-net"]
     ports:
       - "80:80"
       - "443:443"
@@ -22,7 +23,7 @@ services:
       - N8N_PERSONALIZATION_ENABLED=false
       - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
       - N8N_USER_MANAGEMENT_JWT_SECRETl=${N8N_USER_MANAGEMENT_JWT_SECRET}
-      - WEBHOOK_URL=https://${N8N_HOST}
+      - WEBHOOK_URL=https://${N8N_WEBHOOK}
       - N8N_HOST=${N8N_HOST}
       - N8N_PORT=5678
       - N8N_PROTOCOL=https
